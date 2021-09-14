@@ -14,3 +14,7 @@ class ColumnNotExistsException(Exception):
 
     def __str__(self):
         return f"选择进行过滤的列{self.col}在数据中不存在!"
+
+class NoDefaultColumnToMerge(Exception):
+    def __str__(self):
+        return "未找到默认的可以进行表连接的列，请指定"
