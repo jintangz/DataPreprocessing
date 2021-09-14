@@ -7,3 +7,5 @@ If you has some advice about this, you can contact me with email jintangz@126.co
 Of crouse, It would be my pleasure if you are willing to join me to help this project delevop better.
 
 On September 13, 2021, The module of DataLoad and DataFilter was finished. And it passed unit test smoothly. I was so happy, hahah. 
+
+On September 14, 2021, The module of DataMerger and DataAppender was finished. And it passed unit test smoothly. I was so happy, hahah.
