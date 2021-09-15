@@ -45,3 +45,11 @@ class OuterDataMerger(DataMerger):
     def merge(self, left: DataFrame, right: DataFrame, left_on: Union[None, AnyStr, List[AnyStr]] = None,
               right_on: Union[None, AnyStr, List[AnyStr]] = None, **kwargs):
         return self.auxMerge(left=left, right=right, how='outer', left_on=left_on, right_on=right_on, **kwargs)
+
+
+class Merger(object):
+    def __init__(self, data: DataFrame):
+        self.data = data
+
+    def merge(self, dataMerger: DataMerger, right: DataFrame, left_on, right_on, **kwargs):
+        return Merger(dataMerger.merge(self.data, right, left_on=left_on, right_on=right_on, **kwargs))
