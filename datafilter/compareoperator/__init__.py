@@ -2,7 +2,7 @@ import abc
 from typing import  AnyStr
 
 from pandas import DataFrame
-from exceptionDefine import ColumnNotExistsException
+from exceptionDefine import FilterColumnNotExistsException
 
 class CompareOperator(metaclass=abc.ABCMeta):
     @abc.abstractmethod
@@ -25,7 +25,7 @@ class Equal(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if Equal.colExists(data, col):
             return data[col] == value
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class NotEqual(CompareOperator):
@@ -33,7 +33,7 @@ class NotEqual(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if NotEqual.colExists(data, col):
             return data[col] != value
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class GreaterThan(CompareOperator):
@@ -41,7 +41,7 @@ class GreaterThan(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if GreaterThan.colExists(data, col):
             return data[col] > value
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class GreaterEqual(CompareOperator):
@@ -49,7 +49,7 @@ class GreaterEqual(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if GreaterEqual.colExists(data, col):
             return data[col] >= value
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class LessThan(CompareOperator):
@@ -57,7 +57,7 @@ class LessThan(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if LessThan.colExists(data, col):
             return data[col] < value
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class LessEqual(CompareOperator):
@@ -65,7 +65,7 @@ class LessEqual(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if LessEqual.colExists(data, col):
             return data[col] <= value
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class StartsWith(CompareOperator):
@@ -73,7 +73,7 @@ class StartsWith(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if StartsWith.colExists(data, col):
             return data[col].apply(lambda x: str(x).startswith(str(value)))
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class NotStartsWith(CompareOperator):
@@ -81,7 +81,7 @@ class NotStartsWith(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if NotStartsWith.colExists(data, col):
             return data[col].apply(lambda x: not str(x).startswith(str(value)))
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class EndsWith(CompareOperator):
@@ -89,7 +89,7 @@ class EndsWith(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if EndsWith.colExists(data, col):
             return data[col].apply(lambda x: str(x).endswith(str(value)))
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class NotEndsWith(CompareOperator):
@@ -97,7 +97,7 @@ class NotEndsWith(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if NotEndsWith.colExists(data, col):
             return data[col].apply(lambda x: not str(x).endswith(str(value)))
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class Contains(CompareOperator):
@@ -105,7 +105,7 @@ class Contains(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if Contains.colExists(data, col):
             return data[col].apply(lambda x: str(value) in str(x))
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class NotContains(CompareOperator):
@@ -113,7 +113,7 @@ class NotContains(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if NotContains.colExists(data, col):
             return data[col].apply(lambda x: str(value) not in str(x))
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class In(CompareOperator):
@@ -121,7 +121,7 @@ class In(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if In.colExists(data, col):
             return data[col].isin(value)
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
 
 
 class NotIn(CompareOperator):
@@ -129,4 +129,4 @@ class NotIn(CompareOperator):
     def compare(self, data: DataFrame, col: AnyStr, value):
         if NotIn.colExists(data, col):
             return ~ data[col].isin(value)
-        raise ColumnNotExistsException(col)
+        raise FilterColumnNotExistsException(col)
