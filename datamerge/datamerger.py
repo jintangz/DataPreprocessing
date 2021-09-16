@@ -14,14 +14,14 @@ class DataMerger(metaclass=abc.ABCMeta):
               right_on: Union[None, AnyStr, List[AnyStr]] = None, **kwargs):
         pass
 
-    def __hasSameCol(self, left: DataFrame, right: DataFrame):
+    def hasSameCol(self, left: DataFrame, right: DataFrame):
         """判断进行连接的两个数据集是否具有相同列名的列"""
         return len(set(left.columns).intersection(right.columns)) > 0
 
     def auxMerge(self, left: DataFrame, right: DataFrame, how: str = 'left', left_on=None, right_on=None, **kwargs):
         """进行数据集连接的方法"""
         if left_on == None:
-            if self.__hasSameCol(left, right):
+            if self.hasSameCol(left, right):
                 return left.merge(right)
             raise NoDefaultColumnToMerge
         return left.merge(right, how=how, left_on=left_on, right_on=right_on, **kwargs)
